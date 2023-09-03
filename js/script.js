@@ -4,6 +4,8 @@ const username = "preich-work";
 const reposList = document.querySelector(".repo-list");
 const repoSection = document.querySelector(".repos");
 const repoData = document.querySelector(".repo-data");
+const backToGallery = document.querySelector(".view-repos");
+const filterInput = document.querySelector(".filter-repos");
 
 
 
@@ -42,7 +44,8 @@ displayRepos(repoData);
 
 
 const displayRepos = function (repos){
-for (const repo of repos) {
+    filterInput.classList.remove("hide");
+    for (const repo of repos) {
     const repoItem = document.createElement("li");
     repoItem.classList.add("repo");
     repoItem.innerHTML = `<h3>${repo.name}</h3>`;
@@ -75,9 +78,12 @@ displayRepoInfo (repoInfo, languages);
         };
 
 const displayRepoInfo = function (repoInfo, languages) {
-repoData.innerHTML= "";
+    
+    repoData.innerHTML= "";
+
 repoData.classList.remove("hide");
 repoSection.classList.add("hide");
+backToGallery.classList.remove("hide");
 
 const div = document.createElement("div");
 div.innerHTML =
@@ -89,3 +95,26 @@ div.innerHTML =
 
 repoData.append(div);
     };
+
+    backToGallery.addEventListener("click", function (){
+        backToGallery.classList.add("hide");
+        repoData.classList.add("hide");
+        repoSection.classList.add("show");
+
+    });
+
+    filterInput.addEventListener("input", function(e){
+        const searchText = e.target.value;
+        const repos = document.querySelectorAll(".repo");
+        const searchLowerText = searchText.toLowerCase();
+    
+    
+    for (const repo of repos){
+        const repoLowerText = repo.innerText.toLowerCase();
+        if (repoLowerText.includes(searchText)) {
+            repo.classList.remove("hide");         }
+            else {
+                repo.classList.add("hide");
+            }
+    }});
+    
