@@ -97,9 +97,9 @@ repoData.append(div);
     };
 
     backToGallery.addEventListener("click", function (){
-        backToGallery.classList.add("hide");
+        backToGallery.classList.remove("hide");
         repoData.classList.add("hide");
-        repoSection.classList.add("show");
+        repoSection.classList.add("hide");
 
     });
 
